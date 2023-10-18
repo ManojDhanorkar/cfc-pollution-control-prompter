@@ -1,0 +1,9 @@
+sudo apt update
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev wget libbz2-dev 
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.7 python3.7-distutils
+python3.7 --version
+python3.7 -m pip install pip
+python3.7 -m pip install virtualenv
+python3.7 -m virtualenv venv
+python3.7 -m pip install Flask

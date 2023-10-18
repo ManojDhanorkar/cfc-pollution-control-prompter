@@ -1,0 +1,9 @@
+fastapi
+asyncpg
+ibm-generative-ai
+chromadb
+langchain
+pandas
+langchain-experimental
+sentence_transformers
+psycopg2-binary

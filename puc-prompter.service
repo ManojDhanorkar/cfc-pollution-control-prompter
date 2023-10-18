@@ -1,0 +1,8 @@
+[Unit]
+Description = The PUC Prompter service
+
+[Service]
+ExecStart = /opt/puc-prompter/run.sh
+
+[Install]
+WantedBy = multi-user.target
