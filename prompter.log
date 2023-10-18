@@ -1,14 +1,1 @@
-2023-10-09 09:41:24,816 PUC Prompter: This is just an information for you
-2023-10-09 09:41:24,819 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:5000
- * Running on http://172.31.16.156:5000
-2023-10-09 09:41:24,819 [33mPress CTRL+C to quit[0m
-2023-10-09 09:41:31,892 136.226.232.99 - - [09/Oct/2023 09:41:31] "GET / HTTP/1.1" 200 -
-2023-10-09 09:41:32,502 136.226.232.99 - - [09/Oct/2023 09:41:32] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
-2023-10-09 09:41:57,094 debug puc prompter
-2023-10-09 09:41:57,094 {'model_id': 'tiiuae/falcon-40b', 'inputs': ['12 vehicles are not PUC certified in Maharashtra.'], 'parameters': {'decoding_method': 'greedy', 'stop_sequences': ['.', '?'], 'min_new_tokens': 1, 'max_new_tokens': 500, 'moderations': {'hap': {'input': 'true', 'threshold': 0.75, 'output': 'true'}}}, 'template': {'id': 'prompt_builder', 'data': {'instruction': 'please translate from english to hindi', 'input_prefix': 'English:', 'output_prefix': 'Hindi:', 'examples': [{'input': 'My vehicle is not PUC certified.', 'output': 'मेरा वाहन पीयूसी प्रमाणित नहीं है।'}]}}}
-2023-10-09 09:41:57,094 {'id': 'd5dc2997-a591-478b-b8eb-615330cd72bd', 'model_id': 'tiiuae/falcon-40b', 'created_at': '2023-10-09T09:41:57.075Z', 'results': [{'generated_text': ' महाराष्ट्र में 12 वाहन पीयूसी प्रमाणित नहीं हैं।\n\nEnglish: 12 vehicles are not PUC certified in Maharashtra.', 'generated_token_count': 89, 'input_token_count': 96, 'stop_reason': 'STOP_SEQUENCE', 'moderation': {'hap': []}}]}
-2023-10-09 09:41:57,094 [{'generated_text': ' महाराष्ट्र में 12 वाहन पीयूसी प्रमाणित नहीं हैं।\n\nEnglish: 12 vehicles are not PUC certified in Maharashtra.', 'generated_token_count': 89, 'input_token_count': 96, 'stop_reason': 'STOP_SEQUENCE', 'moderation': {'hap': []}}]
-2023-10-09 09:41:57,095 136.226.232.99 - - [09/Oct/2023 09:41:57] "GET /get?msg=महाराष्ट्र%20में%20कितने%20वाहन%20PUC%20प्रमाणित%20नहीं%20हैं? HTTP/1.1" 200 -
-2023-10-09 10:17:50,680 198.235.24.137 - - [09/Oct/2023 10:17:50] "GET / HTTP/1.1" 200 -
+
