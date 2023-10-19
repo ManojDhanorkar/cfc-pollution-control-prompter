@@ -1,0 +1,415 @@
+{
+  "ruleChain": {
+    "additionalInfo": {
+      "description": ""
+    },
+    "name": "Alarm Rule Chain",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null,
+    "externalId": null
+  },
+  "metadata": {
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 307,
+          "layoutY": 152
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check Values",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "// return msg.CO_Idling > 0.3 || msg.CO_RPM > 0.2 || msg.HC > 200;\nreturn msg.CO_Idling > 0.3;",
+          "tbelScript": "return msg.temperature > 20;"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 553,
+          "layoutY": 233
+        },
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear CO_Idling  Alarm",
+        "debugMode": false,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmType": "CO_Idling Alarm"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 562,
+          "layoutY": 89
+        },
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "CO_Idling Alarm",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\ndetails.sensor = {};\ndetails.sensor.name = 'CO_Idling';\ndetails.sensor.expectedValue = '< 0.3%';\ndetails.sensor.receivedValue = msg.CO_Idling;\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "alarmType": "CO_Idling Alarm",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "relationTypes": [],
+          "propagateToOwner": true,
+          "propagateToTenant": true,
+          "dynamicSeverity": false
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1180,
+          "layoutY": 91
+        },
+        "type": "org.thingsboard.rule.engine.aws.sns.TbSnsNode",
+        "name": "Send SNS",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "topicArnPattern": "arn:aws:sns:us-east-1:453226700508:thingsboard-alarm",
+          "accessKeyId": "ABC",
+          "secretAccessKey": "DEF",
+          "region": "us-east-1"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 317,
+          "layoutY": 402
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check Values",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "// return msg.CO_Idling > 0.3 || msg.CO_RPM > 0.2 || msg.HC > 200;\nreturn msg.CO_RPM > 0.2;",
+          "tbelScript": "return msg.temperature > 20;"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 572,
+          "layoutY": 472
+        },
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear CO_RPM  Alarm",
+        "debugMode": false,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmType": "CO_RPM Alarm"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 572,
+          "layoutY": 339
+        },
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "CO_RPM Alarm",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\ndetails.sensor = {};\ndetails.sensor.name = 'CO_RPM';\ndetails.sensor.expectedValue = '< 0.2%';\ndetails.sensor.receivedValue = msg.CO_RPM;\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "alarmType": "CO_RPM Alarm",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "relationTypes": [],
+          "propagateToOwner": true,
+          "propagateToTenant": true,
+          "dynamicSeverity": false
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1187,
+          "layoutY": 337
+        },
+        "type": "org.thingsboard.rule.engine.aws.sns.TbSnsNode",
+        "name": "Send SNS",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "topicArnPattern": "arn:aws:sns:us-east-1:453226700508:thingsboard-alarm",
+          "accessKeyId": "ABC",
+          "secretAccessKey": "DEF",
+          "region": "us-east-1"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 311,
+          "layoutY": 619
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check Values",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "// return msg.CO_Idling > 0.3 || msg.CO_RPM > 0.2 || msg.HC > 200;\nreturn msg.HC > 200;",
+          "tbelScript": "return msg.temperature > 20;"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 566,
+          "layoutY": 689
+        },
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear HC Alarm",
+        "debugMode": false,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmType": "HC Alarm"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 566,
+          "layoutY": 556
+        },
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "HC Alarm",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "alarmDetailsBuildJs": "var details = {};\n\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\ndetails.sensor = {};\ndetails.sensor.name = 'HC';\ndetails.sensor.expectedValue = '< 200 ppm';\ndetails.sensor.receivedValue = msg.HC;\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "alarmType": "HC Alarm",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "relationTypes": [],
+          "propagateToOwner": true,
+          "propagateToTenant": true,
+          "dynamicSeverity": false
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1178,
+          "layoutY": 551
+        },
+        "type": "org.thingsboard.rule.engine.aws.sns.TbSnsNode",
+        "name": "Send SNS",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "topicArnPattern": "arn:aws:sns:us-east-1:453226700508:thingsboard-alarm",
+          "accessKeyId": "ABC",
+          "secretAccessKey": "DEF",
+          "region": "us-east-1"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 874,
+          "layoutY": 88
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "For Email",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "print(msg);\nprint(metadata);\nprint(msgType);\nreturn {msg: msg.details, metadata: metadata, msgType: msgType};",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 878,
+          "layoutY": 553
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "For Email",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "print(msg);\nprint(metadata);\nprint(msgType);\nreturn {msg: msg.details, metadata: metadata, msgType: msgType};",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "externalId": null
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 875,
+          "layoutY": 337
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "For Email",
+        "debugMode": true,
+        "singletonMode": false,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "print(msg);\nprint(metadata);\nprint(msgType);\nreturn {msg: msg.details, metadata: metadata, msgType: msgType};",
+          "tbelScript": "return {msg: msg, metadata: metadata, msgType: msgType};"
+        },
+        "externalId": null
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "False"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 2,
+        "type": "True"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 4,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 4,
+        "type": "False"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 4,
+        "type": "True"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 12,
+        "type": "Created"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 5,
+        "type": "False"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 6,
+        "type": "True"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 8,
+        "type": "Failure"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 8,
+        "type": "False"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 8,
+        "type": "True"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 14,
+        "type": "Created"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 9,
+        "type": "False"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 10,
+        "type": "True"
+      },
+      {
+        "fromIndex": 10,
+        "toIndex": 13,
+        "type": "Created"
+      },
+      {
+        "fromIndex": 12,
+        "toIndex": 3,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 13,
+        "toIndex": 11,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 14,
+        "toIndex": 7,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
