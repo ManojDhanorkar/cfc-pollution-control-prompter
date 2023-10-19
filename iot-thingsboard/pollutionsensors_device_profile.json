@@ -1,0 +1,33 @@
+{
+  "name": "PollutionSensors",
+  "description": "",
+  "image": null,
+  "type": "DEFAULT",
+  "transportType": "DEFAULT",
+  "provisionType": "ALLOW_CREATE_NEW_DEVICES",
+  "defaultRuleChainId": {
+    "entityType": "RULE_CHAIN",
+    "id": "aefc8210-5a0e-11ee-80e5-edabba34af5c"
+  },
+  "defaultDashboardId": null,
+  "defaultQueueName": null,
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "DEFAULT"
+    },
+    "provisionConfiguration": {
+      "type": "ALLOW_CREATE_NEW_DEVICES",
+      "provisionDeviceSecret": "vehiclessecret"
+    },
+    "alarms": null
+  },
+  "provisionDeviceKey": "vehicleskey",
+  "firmwareId": null,
+  "softwareId": null,
+  "defaultEdgeRuleChainId": null,
+  "externalId": null,
+  "default": false
+}
